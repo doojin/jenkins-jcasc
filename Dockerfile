@@ -18,6 +18,7 @@ RUN java -jar /tmp/plugin-manager.jar \
 FROM jenkins/jenkins:lts-jdk17
 
 ENV CASC_JENKINS_CONFIG=/var/jenkins_home/casc/jenkins.yaml
+ENV JAVA_OPTS="-Djenkins.install.runSetupWizard=false"
 
 COPY --from=download-plugins /tmp/plugins /usr/share/jenkins/ref/plugins
 COPY jenkins.yaml /var/jenkins_home/casc/jenkins.yaml
