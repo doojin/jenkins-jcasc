@@ -1,2 +1,10 @@
 jenkins:
-  systemMessage: "Hello, world!"
+  securityRealm:
+    local:
+      allowsSignup: false
+      users:
+        - id: admin
+          password: admin
+  authorizationStrategy:
+    loggedInUsersCanDoAnything:
+      allowAnonymousRead: false
