@@ -10,3 +10,4 @@ pipeline-graph-view:544.v32014c99450f
 timestamper:1.29
 workflow-aggregator:608.v67378e9d3db_1
 ws-cleanup:0.48
+job-dsl:1.92

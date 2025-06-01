@@ -21,4 +21,5 @@ ENV CASC_JENKINS_CONFIG=/var/jenkins_home/casc
 ENV JAVA_OPTS="-Djenkins.install.runSetupWizard=false"
 
 COPY --from=download-plugins /tmp/plugins /usr/share/jenkins/ref/plugins
-COPY casc/* /var/jenkins_home/casc
+COPY casc/ /var/jenkins_home/casc
+COPY create-jobs.groovy /var/jenkins_home/init.groovy.d/create-jobs.groovy
