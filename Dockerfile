@@ -1,4 +1,4 @@
-FROM jenkins/jenkins:lts-jdk17 AS download-plugins
+FROM jenkins/jenkins:lts-jdk21 AS download-plugins
 
 ARG VERSION_PLUGIN_MANAGER=2.13.2
 
@@ -15,7 +15,7 @@ RUN java -jar /tmp/plugin-manager.jar \
     --plugin-file plugins.txt \
     --plugin-download-directory /tmp/plugins
 
-FROM jenkins/jenkins:lts-jdk17
+FROM jenkins/jenkins:lts-jdk21
 
 ENV CASC_JENKINS_CONFIG=/var/jenkins_home/casc/jenkins.yaml
 ENV JAVA_OPTS="-Djenkins.install.runSetupWizard=false"
