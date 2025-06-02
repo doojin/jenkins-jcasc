@@ -1,19 +1,7 @@
 import jenkins.model.*
-import javaposse.jobdsl.plugin.ExecuteDslScripts
+import hudson.model.*
+import java.nio.file.Files
+import java.nio.file.Paths
 
-
-def workspace = new File("/var/jenkins_home/casc/jobs")
-def files = workspace.listFiles().findAll { 
-    it.name.endsWith(".groovy")
-}
-
-files.each { file ->
-    def script = new ExecuteDslScripts()
-    script.setTargets(file.getAbsolutePath())
-    script.setIgnoreExisting(false)
-    script.setRemovedJobAction(ExecuteDslScripts.RemovedJobAction.IGNORE)
-    script.setRemovedViewAction(ExecuteDslScripts.RemovedViewAction.IGNORE)
-    script.setLookupStrategy(javaposse.jobdsl.plugin.LookupStrategy.SEED_JOB)
-    script.setAdditionalClasspath('')
-    script.perform(Jenkins.instance, Jenkins.instance.getDescriptorByType(ExecuteDslScripts.DescriptorImpl))
-}
+def xmlStream = new FileInputStream('/var/jenkins_home/casc/jobs/sample-node-service.xml')
+def job = Jenkins.instance.createProjectFromXML('sample-nodejs-service', xmlStream)
