@@ -1,7 +1,7 @@
 jobs:
   - script: |
-      multibranchPipelineJob('test-job') {
-        displayName('test-job')
+      multibranchPipelineJob('sample-nodejs-service') {
+        displayName('sample-nodejs-service')
         branchSources {
           branchSource {
             source {
