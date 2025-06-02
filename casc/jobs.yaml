@@ -1,0 +1,70 @@
+jobs:
+  - script: |
+      multibranchPipelineJob('test-job') {
+        displayName('test-job')
+        branchSources {
+          branchSource {
+            source {
+              github {
+                id('github-sample-nodejs-service')
+                credentialsId('Doojin-Jenkins')
+                repositoryUrl('https://github.com/doojin/sample-nodejs-service')
+                configuredByUrl(true)
+                repoOwner('doojin')
+                repository('sample-nodejs-service')
+
+                traits {
+                  gitHubSourceChecks()
+                  gitHubBranchDiscovery {
+                    strategyId(1)
+                  }
+                  gitHubPullRequestDiscovery {
+                    strategyId(1)
+                  }
+                  gitHubTagDiscovery()
+                  headWildcardFilter {
+                    includes('main PR-* v*')
+                    excludes('')
+                  }
+                  gitHubStatusChecks {
+                    name('Jenkins')
+                    skip(true)
+                  }
+                }
+              }
+            }
+
+            buildStrategies {
+              buildAnyBranches {
+                strategies {
+                  buildNamedBranches {
+                    filters {
+                      wildcards {
+                        includes('main PR-*')
+                        excludes('')
+                        caseSensitive(false)
+                      }
+                    }
+                  }
+                  buildTags {
+                    atLeastDays('')
+                    atMostDays('7')
+                  }
+                  buildChangeRequests {
+                    ignoreTargetOnlyChanges(false)
+                    ignoreUntrustedChanges(false)
+                  }
+                }
+              }
+            }
+          }
+        }
+
+        orphanedItemStrategy {
+          defaultOrphanedItemStrategy {
+            pruneDeadBranches(true)
+            daysToKeepStr('')
+            numToKeepStr('')
+          }
+        }
+      }
