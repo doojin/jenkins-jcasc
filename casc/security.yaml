@@ -1,10 +1,46 @@
 jenkins:
-  securityRealm:
-    local:
-      allowsSignup: false
-      users:
-        - id: admin
-          password: admin
   authorizationStrategy:
-    loggedInUsersCanDoAnything:
-      allowAnonymousRead: false
+    globalMatrix:
+      entries:
+      - user:
+          name: "dmitry.papka@gmail.com"
+          permissions:
+          - "Agent/Build"
+          - "Agent/Configure"
+          - "Agent/Connect"
+          - "Agent/Create"
+          - "Agent/Delete"
+          - "Agent/Disconnect"
+          - "Agent/Provision"
+          - "Credentials/Create"
+          - "Credentials/Delete"
+          - "Credentials/ManageDomains"
+          - "Credentials/Update"
+          - "Credentials/View"
+          - "Job/Build"
+          - "Job/Cancel"
+          - "Job/Configure"
+          - "Job/Create"
+          - "Job/Delete"
+          - "Job/Discover"
+          - "Job/Move"
+          - "Job/Read"
+          - "Job/Workspace"
+          - "Metrics/HealthCheck"
+          - "Metrics/ThreadDump"
+          - "Metrics/View"
+          - "Overall/Administer"
+          - "Overall/Read"
+          - "Run/Delete"
+          - "Run/Replay"
+          - "Run/Update"
+          - "SCM/Tag"
+          - "View/Configure"
+          - "View/Create"
+          - "View/Delete"
+          - "View/Read"
+  securityRealm:
+    googleOAuth2:
+      clientId: "1098608104705-rbh3ciqin66scqct6nv45eq8pblf1fo0.apps.googleusercontent.com"
+      clientSecret: "${GOOGLE_OAUTH_SECRET}"
+      rootURLFromRequest: true
